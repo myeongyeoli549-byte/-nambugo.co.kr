@@ -1,6 +1,11 @@
 [build]
   publish = "."
 
+[[redirects]]
+  from = "https://www.nambugo.co.kr/*"
+  to = "https://nambugo.co.kr/:splat"
+  status = 301
+  force = true
 [build.environment]
   NODE_VERSION = "18"
 

@@ -1,0 +1,36 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "https://www.nambugo.co.kr/*"
+  to = "https://nambugo.co.kr/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/:splat/"
+  status = 301
+  force = false
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[dev]
+  framework = "#static"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "index, follow"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

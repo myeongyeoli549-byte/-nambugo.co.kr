@@ -3,27 +3,32 @@
 
 [[redirects]]
   from = "https://www.nambugo.co.kr/*"
-  to = "https://nambugo.co.kr/:splat"
+  to   = "https://nambugo.co.kr/:splat"
   status = 301
-  force = true
+  force  = true
 
-[[redirects]]
-  from = "/*"
-  to = "/:splat/"
-  status = 301
-  force = false
-
-[build.environment]
-  NODE_VERSION = "18"
-
-[dev]
-  framework = "#static"
-
+# 기본 보안·SEO 헤더
 [[headers]]
   for = "/*"
   [headers.values]
     X-Robots-Tag = "index, follow"
 
+# HTML: 항상 최신 버전 (배포 즉시 반영)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# 이미지: 1주일 캐시
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# sitemap / robots
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
